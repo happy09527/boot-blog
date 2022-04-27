@@ -17,13 +17,13 @@ import java.util.List;
 /**
  * @author hap
  * @date 2022/4/20 16:40
- * @describe
+ * @describe 身份验证
  */
 @Service
 @Slf4j
 public class AuthServiceImpl implements AuthService {
     @Autowired
-    AdminService adminService;
+    private AdminService adminService;
 
     @Override
     public boolean auth(HttpServletRequest request, Authentication authentication) {

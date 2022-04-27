@@ -12,4 +12,5 @@ public interface CommentsService {
     Result commentByArticleId(Long id);
 
     Result createComment(CommentParam commentParam);
+
 }

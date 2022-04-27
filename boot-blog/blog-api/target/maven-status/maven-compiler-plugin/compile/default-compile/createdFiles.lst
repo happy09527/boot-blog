@@ -49,6 +49,7 @@ com\example\blog\handler\LoginInterceptor.class
 com\example\blog\controller\ArticleController.class
 com\example\blog\dao\pojo\Article.class
 com\example\blog\handler\AllExceptionHandler.class
+com\example\blog\controller\TestController.class
 com\example\blog\common\cache\CacheAspect.class
 com\example\blog\dao\mapper\ArticleTagMapper.class
 com\example\blog\service\impl\SysUserServiceImpl.class

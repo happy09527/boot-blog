@@ -5,27 +5,25 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.blog.controller.ArticleController;
 import com.example.blog.dao.dos.Archives;
-import com.example.blog.dao.mapper.ArticleBodyMapper;
-import com.example.blog.dao.mapper.ArticleMapper;
-import com.example.blog.dao.mapper.ArticleTagMapper;
-import com.example.blog.dao.mapper.CategoryMapper;
+import com.example.blog.dao.mapper.*;
 import com.example.blog.dao.pojo.*;
 import com.example.blog.service.*;
+import com.example.blog.utils.CacheUtils;
 import com.example.blog.utils.UserThreadLocal;
 import com.example.blog.vo.*;
 import com.example.blog.vo.params.ArticleParam;
 import com.example.blog.vo.params.PageParams;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.joda.time.DateTime;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author hap
@@ -52,6 +50,14 @@ public class ArticleServiceImpl implements ArticleService {
     ArticleTagMapper articleTagMapper;
     @Autowired
     CategoryMapper categoryMapper;
+    @Autowired
+    LoginService loginService;
+    @Autowired
+    CommentMapper commentMapper;
+    @Autowired
+    StringRedisTemplate redisTemplate;
+    @Autowired
+    CacheUtils cacheUtils;
 
     /**
      * 分页查询article数据库的表，得到结果
@@ -154,6 +160,8 @@ public class ArticleServiceImpl implements ArticleService {
         UserVo userVo = sysUserService.findUserVoById(authorId);
         ArticleVo articleVo = copy(article, true, true, true, true);
         articleVo.setAuthorAvatar(userVo.getAvatar());
+        articleVo.setAuthorId(String.valueOf(authorId));
+//        articleVo.setCategory();
         threadService.updateArticleViewCount(articleMapper, article);
         return Result.success(articleVo);
     }
@@ -202,7 +210,60 @@ public class ArticleServiceImpl implements ArticleService {
 
         ArticleVo articleVo = new ArticleVo();
         articleVo.setId(String.valueOf(article.getId()));
+        cacheUtils.deleteCache("list_article*");
         return Result.success(articleVo);
+    }
+
+    /**
+     * 修改文章
+     */
+    @Override
+    public Result edit(ArticleParam articleParam) {
+        Long articleId = articleParam.getId();
+        Article articleDB = articleMapper.selectById(articleId);
+        articleDB.setTitle(articleParam.getTitle());
+        articleDB.setCategoryId(Long.valueOf(articleParam.getCategory().getId()));
+        articleDB.setSummary(articleParam.getSummary());
+        articleMapper.updateById(articleDB);
+
+        ArticleBody articleBodyDB = articleBodyMapper.selectById(articleDB.getBodyId());
+        articleBodyDB.setContent(articleParam.getBody().getContent());
+        articleBodyDB.setContentHtml(articleParam.getBody().getContentHtml());
+        articleBodyMapper.updateById(articleBodyDB);
+
+        List<TagVo> tags = articleParam.getTags();
+        articleTagMapper.deleteByArticleId(articleId);
+        if (tags != null) {
+            for (TagVo tagVo : tags) {
+                ArticleTag articleTag = new ArticleTag();
+                articleTag.setTagId(Long.valueOf(tagVo.getId()));
+                articleTag.setArticleId(articleId);
+                articleTagMapper.insert(articleTag);
+            }
+        }
+        ArticleVo articleVo = new ArticleVo();
+        articleVo.setId(String.valueOf(articleDB.getId()));
+        cacheUtils.deleteCache("list_article*");
+
+        return Result.success(articleVo);
+    }
+
+    /**
+     * 删除文章
+     */
+    @Override
+    public Result delete(String token, String id) {
+        Long articleId = Long.valueOf(id.substring(0, id.length() - 1));
+        SysUser sysUser = loginService.checkToken(token);
+        if (sysUser == null) {
+            return Result.fail(ErrorCode.NO_LOGIN.getCode(), ErrorCode.NO_LOGIN.getMsg());
+        }
+        articleMapper.deleteById(articleId);
+        articleBodyMapper.deleteByArticleId(articleId);
+        articleTagMapper.deleteByArticleId(articleId);
+        commentMapper.deleteByArticleId(articleId);
+        cacheUtils.deleteCache("list_article*");
+        return Result.success(token);
     }
 
     /**

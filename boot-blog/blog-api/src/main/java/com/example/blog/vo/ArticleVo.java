@@ -35,10 +35,17 @@ public class ArticleVo {
 
     private String author;
 
+    private String authorId;
+
     private ArticleBodyVo body;
 
     private List<TagVo> tags;
 
     private CategoryVo  category;
+
     private String authorAvatar;
+    //字数，阅读时间
+//    private Integer number;
+//
+//    private Integer minutes;
 }

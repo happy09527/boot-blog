@@ -82,4 +82,23 @@ public class ArticleController {
     public Result publish(@RequestBody ArticleParam articleParam) {
         return articleService.publish(articleParam);
     }
+
+    /**
+     * 编辑修改文章
+     */
+    @PostMapping("/edit")
+    @LogAnnotation(URL = "/article/edit", operator = "修改文章")
+    public Result edit(@RequestBody ArticleParam articleParam) {
+        return articleService.edit(articleParam);
+    }
+    /**
+     * 删除文章
+     */
+    @PostMapping("/delete")
+    @LogAnnotation(URL = "/article/delete" ,operator = "删除文章")
+    public Result delete(@RequestHeader("Authorization") String token,
+                         @RequestBody String articleId){
+        return articleService.delete(token,articleId);
+
+    }
 }

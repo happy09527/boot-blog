@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * @author hap
  * @date 2022/4/20 16:20
- * @describe
+ * @describe 管理员用户安全验证
  */
 @Service
 @Slf4j
@@ -38,7 +38,6 @@ public class SecurityUserServiceImpl implements SecurityUserService, UserDetails
         }
         ArrayList<GrantedAuthority> authorities = new ArrayList<>();
         UserDetails userDetails = new User(username, admin.getPassword(), authorities);
-
         return userDetails;
     }
 }

@@ -31,14 +31,14 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryVo findCategoryById(Long id) {
         Category category = categoryMapper.selectById(id);
-        CategoryVo categoryVo = new CategoryVo();
-        //因为category,categoryVo属性一样所以可以使用 BeanUtils.copyProperties
-        BeanUtils.copyProperties(category, categoryVo);
+        CategoryVo categoryVo;
+        categoryVo = copy(category);
         return categoryVo;
     }
 
     /**
      * 查找所有分类
+     *
      * @return
      */
     @Override
@@ -49,6 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     /**
      * 通过分类Id查找全部文章
+     *
      * @return
      */
     @Override

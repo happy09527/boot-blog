@@ -21,4 +21,8 @@ public interface ArticleService {
     Result findArticleById(Long articleId);
 
     Result publish(ArticleParam articleParam);
+
+    Result edit(ArticleParam articleParam);
+
+    Result delete(String token,String articleId);
 }

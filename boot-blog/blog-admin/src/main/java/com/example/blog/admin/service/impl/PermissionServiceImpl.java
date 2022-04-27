@@ -15,13 +15,16 @@ import org.springframework.stereotype.Service;
 /**
  * @author hap
  * @date 2022/4/20 14:51
- * @describe
+ * @describe 权限管理
  */
 @Service
 public class PermissionServiceImpl implements PermissionService {
     @Autowired
     PermissionMapper permissionMapper;
 
+    /**
+     * 获取权限
+     */
     @Override
     public Result permissionList(PageParam pageParam) {
         Page<Permission> permissionPage = new Page<>(
@@ -37,23 +40,30 @@ public class PermissionServiceImpl implements PermissionService {
         return Result.success(pageResult);
     }
 
+    /**
+     * 增加权限
+     */
     @Override
     public Result add(Permission permission) {
         this.permissionMapper.insert(permission);
         return Result.success(null);
     }
 
+    /**
+     * 修改权限
+     */
     @Override
     public Result update(Permission permission) {
         this.permissionMapper.updateById(permission);
         return Result.success(null);
     }
 
+    /**
+     * 删除权限
+     */
     @Override
     public Result delete(Long id) {
         this.permissionMapper.deleteById(id);
         return Result.success(null);
     }
-
-
 }

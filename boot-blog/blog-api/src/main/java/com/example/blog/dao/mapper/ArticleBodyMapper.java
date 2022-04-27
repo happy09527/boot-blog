@@ -15,4 +15,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ArticleBodyMapper extends BaseMapper<ArticleBody> {
+    void deleteByArticleId(Long articleId);
 }

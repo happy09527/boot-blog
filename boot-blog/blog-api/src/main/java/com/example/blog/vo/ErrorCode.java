@@ -13,8 +13,8 @@ public enum ErrorCode {
     NO_PERMISSION(10003, "无访问权限"),
     TOKEN_ERROR(10004,"token错误"),
     ACCOUNT_EXIST(10005,"账号已存在"),
-    SESSION_TIME_OUT(90001, "会话超时"),
-    NO_LOGIN(90002, "未登录"),
+    SESSION_TIME_OUT(10006, "会话超时"),
+    NO_LOGIN(10007, "未登录"),
     ;
 
     private int code;

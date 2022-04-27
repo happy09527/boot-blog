@@ -25,9 +25,8 @@ public class LogoutController {
      * 推出账号
      */
     @GetMapping
-    @LogAnnotation(URL = "/logout", operator = "推出账号")
+    @LogAnnotation(URL = "/logout", operator = "退出账号")
     public Result logout(@RequestHeader("Authorization") String token) {
         return loginService.logout(token);
     }
-
 }

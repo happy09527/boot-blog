@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
 /**
  * @author hap
  * @date 2022/4/18 22:23
- * @describe
+ * @describe 日志输出
  */
 @Component
 @Aspect //切面 定义了通知和切点的关系

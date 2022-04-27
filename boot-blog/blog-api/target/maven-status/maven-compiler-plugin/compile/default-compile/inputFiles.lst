@@ -28,6 +28,7 @@ E:\javaPro\source-code-20220207\boot-blog\blog-api\src\main\java\com\example\blo
 E:\javaPro\source-code-20220207\boot-blog\blog-api\src\main\java\com\example\blog\dao\pojo\ArticleBody.java
 E:\javaPro\source-code-20220207\boot-blog\blog-api\src\main\java\com\example\blog\utils\JWTUtils.java
 E:\javaPro\source-code-20220207\boot-blog\blog-api\src\main\java\com\example\blog\dao\pojo\SysUser.java
+E:\javaPro\source-code-20220207\boot-blog\blog-api\src\main\java\com\example\blog\controller\TestController.java
 E:\javaPro\source-code-20220207\boot-blog\blog-api\src\main\java\com\example\blog\dao\mapper\CategoryMapper.java
 E:\javaPro\source-code-20220207\boot-blog\blog-api\src\main\java\com\example\blog\handler\AllExceptionHandler.java
 E:\javaPro\source-code-20220207\boot-blog\blog-api\src\main\java\com\example\blog\service\impl\SysUserServiceImpl.java
