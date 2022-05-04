@@ -1,5 +1,8 @@
 package com.example.blog.dao.pojo;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author hap
@@ -34,7 +37,7 @@ public class Article {
      */
     private Long bodyId;
     /**
-     *类别id
+     * 类别id
      */
     private Long categoryId;
 
@@ -48,4 +51,5 @@ public class Article {
      * 创建时间
      */
     private Long createDate;
+
 }

@@ -99,6 +99,15 @@ public class ArticleController {
     public Result delete(@RequestHeader("Authorization") String token,
                          @RequestBody String articleId){
         return articleService.delete(token,articleId);
+    }
 
+    /**
+     * 搜索文章
+     */
+    @PostMapping("/search")
+    @LogAnnotation(URL = "/articles/search",operator = "搜索文章")
+    public Result search(@RequestBody ArticleParam articleParam){
+        log.info(articleParam+"aaaaaaaaaa");
+        return articleService.search(articleParam.getTitle());
     }
 }

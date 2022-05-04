@@ -17,8 +17,11 @@ public class TestBlog {
 
     @Test
     public void test1() {
-        String token = JWTUtils.createToken(100L);
-        Map<String, Object> stringObjectMap = JWTUtils.checkToken(token);
-        System.out.println(stringObjectMap.values());
+//        String token = JWTUtils.createToken(100L);
+//        Map<String, Object> stringObjectMap = JWTUtils.checkToken(token);
+//        System.out.println(stringObjectMap.values());
+
+        char ad = 'A';
+        System.out.println(ad-'a');
     }
 }

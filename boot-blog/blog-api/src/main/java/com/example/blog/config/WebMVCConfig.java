@@ -26,7 +26,10 @@ public class WebMVCConfig implements WebMvcConfigurer {
         registry.addMapping("/**").allowedOriginPatterns("http://localhost:8080")
 //                .allowedOriginPatterns("https://haper.top")
 //                .allowedOriginPatterns("https://180.76.149.47")
-                .allowedOriginPatterns("*");
+                .allowedOriginPatterns("*")
+                .allowedHeaders("*")
+                .allowedOriginPatterns("*")
+                .allowedMethods("*");
     }
 
     /**

@@ -2,10 +2,6 @@ package com.example.blog.vo;
 
 import java.util.List;
 
-import com.example.blog.dao.pojo.SysUser;
-import com.example.blog.dao.pojo.Tag;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 /**
@@ -44,8 +40,4 @@ public class ArticleVo {
     private CategoryVo  category;
 
     private String authorAvatar;
-    //字数，阅读时间
-//    private Integer number;
-//
-//    private Integer minutes;
 }

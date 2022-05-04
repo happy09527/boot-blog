@@ -267,6 +267,19 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     /**
+     * 查询文章，模糊匹配
+     */
+    @Override
+    public Result search(String search) {
+        LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.orderByDesc(Article::getViewCounts);
+        queryWrapper.select(Article::getId,Article::getTitle);
+        queryWrapper.like(Article::getTitle,search);
+        List<Article> articles = articleMapper.selectList(queryWrapper);
+        return Result.success(copyList(articles,false,false));
+    }
+
+    /**
      * 将entity对象集合转换为vo对象集合
      */
     private List<ArticleVo> copyList(List<Article> articleList, boolean isTags, boolean isAuthor) {

@@ -25,4 +25,6 @@ public interface ArticleService {
     Result edit(ArticleParam articleParam);
 
     Result delete(String token,String articleId);
+
+    Result search(String title);
 }
