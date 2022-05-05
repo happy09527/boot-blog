@@ -23,6 +23,7 @@
         <relativePath/>
     </parent>
     <dependencyManagement>
+
     </dependencyManagement>
     <build>
         <plugins>

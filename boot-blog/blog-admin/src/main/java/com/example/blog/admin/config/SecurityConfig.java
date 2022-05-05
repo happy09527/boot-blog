@@ -28,25 +28,17 @@ import java.io.PrintWriter;
 /**
  * @author hap
  * @date 2022/4/20 16:11
- * @describe
+ * @describe spring security配置类
  */
 
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//    @Autowired
-//    AuthServiceImpl authService;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-//    public static void main(String[] args) {
-//        //加密策略 MD5 不安全 彩虹表  MD5 加盐
-//        String mszlu = new BCryptPasswordEncoder().encode("mszlu");
-//        System.out.println(mszlu);
-//    }
 
     @Override
     public void configure(WebSecurity web) throws Exception {

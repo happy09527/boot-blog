@@ -14,7 +14,6 @@ import com.example.blog.vo.*;
 import com.example.blog.vo.params.ArticleParam;
 import com.example.blog.vo.params.PageParams;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.joda.time.DateTime;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,6 +111,7 @@ public class ArticleServiceImpl implements ArticleService {
 //
 //        List<Article> articleList = articlePage.getRecords();
 //        List<ArticleVo> articleVoList = copyList(articleList, true, true);
+//        log.info(String.valueOf(articleVoList));
 //        return Result.success(articleVoList);
 //    }
 
@@ -307,7 +307,7 @@ public class ArticleServiceImpl implements ArticleService {
         ArticleVo articleVo = new ArticleVo();
         articleVo.setId(String.valueOf(article.getId()));
         BeanUtils.copyProperties(article, articleVo);
-        articleVo.setCreateDate(new DateTime(article.getCreateDate()).toString("yyyy-MM-dd HH:mm"));
+        articleVo.setCreateDate(String.valueOf(article.getCreateDate()));
         if (isAuthor) {
             articleVo.setAuthor(sysUserService.findUserById(article.getAuthorId()).getNickname());
         }

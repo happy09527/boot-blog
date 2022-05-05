@@ -107,7 +107,6 @@ public class ArticleController {
     @PostMapping("/search")
     @LogAnnotation(URL = "/articles/search",operator = "搜索文章")
     public Result search(@RequestBody ArticleParam articleParam){
-        log.info(articleParam+"aaaaaaaaaa");
         return articleService.search(articleParam.getTitle());
     }
 }
